@@ -1,0 +1,2 @@
+# Optional: only needed when LLM_PROVIDER=gemini. Tests never require it.
+google-genai>=1.0,<2

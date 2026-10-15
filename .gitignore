@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+# Env / secrets
+.env
+.env.*
+!.env.example
+# Local DB
+*.db
+*.sqlite3
+# Node / Next
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Eval output
+evals/results/
