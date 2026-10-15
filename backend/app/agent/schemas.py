@@ -64,8 +64,13 @@ class DraftReplyArgs(_Strict):
 
 
 class ToolCall(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     name: str
     arguments: dict[str, Any] = Field(default_factory=dict)
+    # Opaque provider-specific state that must be replayed verbatim on the next turn
+    # (e.g. Gemini's thought signature on a function-call part). Never serialized or traced.
+    provider_state: Any = Field(default=None, exclude=True, repr=False)
 
 
 class Message(BaseModel):

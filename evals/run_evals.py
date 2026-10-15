@@ -38,7 +38,7 @@ def make_provider(name: str) -> tuple[LLMProvider, str]:
         key = os.environ.get("GEMINI_API_KEY")
         if not key:
             sys.exit("GEMINI_API_KEY is not set; cannot run the gemini evaluation")
-        return GeminiLLM(api_key=key, model=os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")), "gemini"
+        return GeminiLLM(api_key=key, model=os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")), "gemini"
     sys.exit(f"unknown provider {name!r}")
 
 

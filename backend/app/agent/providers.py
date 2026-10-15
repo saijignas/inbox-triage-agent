@@ -233,7 +233,7 @@ class GeminiLLM(LLMProvider):
 
     name = "gemini"
 
-    def __init__(self, api_key: str | None = None, model: str = "gemini-2.5-flash", client: Any = None):
+    def __init__(self, api_key: str | None = None, model: str = "gemini-3.1-flash-lite", client: Any = None):
         self._model = model
         self._key = api_key
         if client is not None:
@@ -262,7 +262,11 @@ class GeminiLLM(LLMProvider):
                 contents.append(types.Content(role="user", parts=[types.Part.from_text(text=m.content)]))
             elif m.role == "assistant":
                 if m.tool_call:
-                    part = types.Part.from_function_call(name=m.tool_call.name, args=m.tool_call.arguments)
+                    # Replay the original part when we have it: newer Gemini models require the
+                    # thought signature on function-call parts to be sent back unchanged.
+                    part = m.tool_call.provider_state or types.Part.from_function_call(
+                        name=m.tool_call.name, args=m.tool_call.arguments
+                    )
                 else:
                     part = types.Part.from_text(text=m.content or "ok")
                 contents.append(types.Content(role="model", parts=[part]))
@@ -295,7 +299,9 @@ class GeminiLLM(LLMProvider):
         for p in parts:
             fc = getattr(p, "function_call", None)
             if fc is not None and fc.name:
-                return LLMResponse(tool_call=ToolCall(name=fc.name, arguments=dict(fc.args or {})))
+                return LLMResponse(
+                    tool_call=ToolCall(name=fc.name, arguments=dict(fc.args or {}), provider_state=p)
+                )
         text = "".join(getattr(p, "text", None) or "" for p in parts).strip()
         if not text:
             raise LLMMalformedOutput("Gemini returned neither a function call nor text")

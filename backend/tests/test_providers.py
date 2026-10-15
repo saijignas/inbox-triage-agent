@@ -99,3 +99,36 @@ def test_gemini_maps_api_errors(code, exc):
     with pytest.raises(exc) as info:
         llm.generate(MSGS, TOOLS)
     assert "key-123" not in str(info.value)  # key scrubbed from messages
+
+
+def test_gemini_thought_signature_is_replayed_verbatim():
+    """Regression: newer Gemini models reject a function call echoed back without its
+    thought signature (HTTP 400). The original part must be kept and replayed unchanged."""
+    part = types.Part(
+        function_call=types.FunctionCall(name="classify_email", args={"category": "billing", "urgency": "high"}),
+        thought_signature=b"sig-123",
+    )
+
+    class _Content:
+        parts = [part]
+
+    class _Cand:
+        content = _Content()
+
+    class _Resp:
+        candidates = [_Cand()]
+
+    parsed = GeminiLLM._parse(_Resp())
+    assert parsed.tool_call.name == "classify_email"
+    assert parsed.tool_call.provider_state is part
+    # provider_state must never leak into serialized traces/records
+    assert "provider_state" not in parsed.tool_call.model_dump()
+
+    system, contents = GeminiLLM._to_contents([
+        Message(role="system", content="s"),
+        Message(role="user", content="hi"),
+        Message(role="assistant", tool_call=parsed.tool_call),
+    ])
+    replayed = contents[-1].parts[0]
+    assert replayed.thought_signature == b"sig-123"
+    assert replayed.function_call.name == "classify_email"

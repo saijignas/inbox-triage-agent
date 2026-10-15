@@ -1,0 +1,176 @@
+{
+  "provider": "gemini",
+  "n": 30,
+  "accuracy": {
+    "category": 0.9666666666666667,
+    "urgency": 0.7666666666666667,
+    "needs_reply": 0.9
+  },
+  "failed_runs": 0,
+  "confusion": {
+    "category": {
+      "meeting_request": {
+        "meeting_request": 3,
+        "personal": 1
+      },
+      "billing": {
+        "billing": 4
+      },
+      "support_request": {
+        "support_request": 4
+      },
+      "newsletter": {
+        "newsletter": 3
+      },
+      "spam": {
+        "spam": 4
+      },
+      "recruiting": {
+        "recruiting": 3
+      },
+      "personal": {
+        "personal": 4
+      },
+      "internal_update": {
+        "internal_update": 4
+      }
+    },
+    "urgency": {
+      "medium": {
+        "medium": 6,
+        "high": 4
+      },
+      "high": {
+        "high": 4
+      },
+      "low": {
+        "low": 13,
+        "high": 2,
+        "medium": 1
+      }
+    }
+  },
+  "mismatches": [
+    {
+      "id": "e03",
+      "subject": "Coffee when you're in town?",
+      "diffs": {
+        "category": {
+          "expected": "meeting_request",
+          "got": "personal"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e07",
+      "subject": "Question about invoice 5523",
+      "diffs": {
+        "urgency": {
+          "expected": "medium",
+          "got": "high"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e09",
+      "subject": "Can't get into the portal",
+      "diffs": {
+        "urgency": {
+          "expected": "medium",
+          "got": "high"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e10",
+      "subject": "App crashes on export",
+      "diffs": {
+        "urgency": {
+          "expected": "medium",
+          "got": "high"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e17",
+      "subject": "Verify your account now",
+      "diffs": {
+        "urgency": {
+          "expected": "low",
+          "got": "high"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e19",
+      "subject": "Quick favor",
+      "diffs": {
+        "urgency": {
+          "expected": "low",
+          "got": "high"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e21",
+      "subject": "Interview confirmation",
+      "diffs": {
+        "urgency": {
+          "expected": "medium",
+          "got": "high"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e23",
+      "subject": "Dinner Saturday?",
+      "diffs": {
+        "urgency": {
+          "expected": "low",
+          "got": "medium"
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e24",
+      "subject": "Happy birthday!",
+      "diffs": {
+        "needs_reply": {
+          "expected": false,
+          "got": true
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e29",
+      "subject": "Postmortem: Tuesday outage",
+      "diffs": {
+        "needs_reply": {
+          "expected": false,
+          "got": true
+        }
+      },
+      "error": null
+    },
+    {
+      "id": "e30",
+      "subject": "Sprint 15 planning notes",
+      "diffs": {
+        "needs_reply": {
+          "expected": false,
+          "got": true
+        }
+      },
+      "error": null
+    }
+  ]
+}

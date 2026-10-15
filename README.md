@@ -132,6 +132,20 @@ That has **not** been run for this repo, and 30 emails is too few to support str
 | POST | `/drafts/{id}/approve`, `/reject` | `409` if already decided |
 | PATCH | `/drafts/{id}` | edit text of a pending draft |
 
+## Measured results (live model)
+
+Run on 2026-10-16 with `gemini-3.1-flash-lite` over the 30 synthetic, author-labeled emails (temperature 0, one run, 0 failed runs; raw output in `evals/reports/`):
+
+| Field | Accuracy |
+|---|---|
+| category | 0.967 (29/30) |
+| urgency | 0.767 (23/30) |
+| needs_reply | 0.900 (27/30) |
+
+How to read this: n = 30 is small and the labels were written by the author, so one email moves a score by 3 points and some labels are debatable. The urgency errors are all over-escalation (the model rated emails higher than the label, never lower); for example it rated a phishing-style "verify your account" email as high urgency, while the label policy says spam is low. This is a single run, so treat the numbers as a baseline, not a benchmark. The FakeLLM numbers above test only the pipeline.
+
+Two defects were found only by running against the real API and are fixed (with a regression test for the second): the default model name had been retired for new users, and newer Gemini models reject a function call that is echoed back without its thought signature (HTTP 400), so the provider now replays the original response part.
+
 ## Limitations and not built yet
 
 - **No Gmail / OAuth.** Emails come from the seeded sample inbox or pasted text. A read-only Gmail connector is a documented

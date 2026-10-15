@@ -1,7 +1,20 @@
 {
   "fake": {
     "_note": "Floors for the FakeLLM keyword stand-in (measured 0.933 / 0.767 / 0.900 on 30 emails). Guards the pipeline, NOT model quality.",
-    "min_accuracy": {"category": 0.90, "urgency": 0.75, "needs_reply": 0.85},
+    "min_accuracy": {
+      "category": 0.9,
+      "urgency": 0.75,
+      "needs_reply": 0.85
+    },
+    "max_failed_runs": 0
+  },
+  "gemini": {
+    "_note": "Measured 2026-10-16 with gemini-3.1-flash-lite on the 30 author-labeled emails: category 0.967, urgency 0.767, needs_reply 0.900, 0 failed runs. Floors sit about one email below the measurement. Single run, temperature 0; live API outputs can vary. Run locally with a key; CI does not run this.",
+    "min_accuracy": {
+      "category": 0.9,
+      "urgency": 0.7,
+      "needs_reply": 0.83
+    },
     "max_failed_runs": 0
   }
 }
