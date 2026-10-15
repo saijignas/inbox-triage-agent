@@ -89,3 +89,9 @@ def test_search_past_emails_tool_sees_earlier_mail(client, admin):
     trace = client.get(f"/emails/{eid}", headers=admin).json()["triage"]["trace"]
     matches = trace[0]["result"]["matches"]
     assert [m["subject"] for m in matches] == ["Launch plan v1"]  # excludes the email itself
+
+
+def test_root_points_to_docs_and_health(client):
+    r = client.get("/")
+    assert r.status_code == 200
+    assert r.json()["docs"] == "/docs" and r.json()["health"] == "/health"

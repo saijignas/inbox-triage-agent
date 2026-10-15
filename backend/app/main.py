@@ -58,6 +58,10 @@ def create_app(
     app.include_router(email_routes.router)
     app.include_router(draft_routes.router)
 
+    @app.get("/", tags=["meta"], include_in_schema=False)
+    def root() -> dict[str, str]:
+        return {"name": "Inbox Triage Agent API", "docs": "/docs", "health": "/health"}
+
     @app.get("/health", tags=["meta"])
     def health() -> dict[str, str]:
         return {"status": "ok", "provider": settings.llm_provider}
