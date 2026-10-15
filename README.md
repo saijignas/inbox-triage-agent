@@ -146,6 +146,16 @@ How to read this: n = 30 is small and the labels were written by the author, so 
 
 Two defects were found only by running against the real API and are fixed (with a regression test for the second): the default model name had been retired for new users, and newer Gemini models reject a function call that is echoed back without its thought signature (HTTP 400), so the provider now replays the original response part.
 
+## Deploy (free tiers; check current limits)
+
+Backend on Render, frontend on Vercel, database on Neon (or any Postgres).
+
+1. **Database:** create a Postgres database and copy its connection string, then change the scheme to `postgresql+psycopg://` and keep `?sslmode=require`.
+2. **Backend (Render):** New > Blueprint > pick this repo (it reads `render.yaml`), or create a Web Service manually with **Root Directory = `backend`** and Runtime = Docker. Set `DATABASE_URL` and `CORS_ORIGINS` (your Vercel URL). `JWT_SECRET` is generated. The default `LLM_PROVIDER=fake` means the public demo never calls a model or needs a key.
+3. **Frontend (Vercel):** import the repo, set **Root Directory = `frontend`**, and set `NEXT_PUBLIC_API_URL` to the Render service URL.
+4. **Register first.** The first registered user becomes the admin (the only one allowed to seed the sample inbox), so create your account immediately after deploying.
+5. **Real model (optional):** set `LLM_PROVIDER=gemini`, `WITH_GEMINI=1` and `GEMINI_API_KEY` (as a secret) on the backend. Use a key with a spending cap; anyone with an account can trigger triage.
+
 ## Limitations and not built yet
 
 - **No Gmail / OAuth.** Emails come from the seeded sample inbox or pasted text. A read-only Gmail connector is a documented

@@ -1,0 +1,30 @@
+# Render Blueprint for the BACKEND only (the frontend goes on Vercel; see README "Deploy").
+# The Dockerfile lives in backend/, so the service root is backend/ (this is why a plain
+# "deploy from repo root" fails with "open Dockerfile: no such file or directory").
+services:
+  - type: web
+    name: inbox-triage-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: JWT_SECRET
+        generateValue: true
+      - key: LLM_PROVIDER
+        value: fake            # public demo default: no model calls, no key exposed
+      - key: DATABASE_URL
+        sync: false            # set in the dashboard: postgresql+psycopg://USER:PASS@HOST/DB?sslmode=require
+      - key: CORS_ORIGINS
+        sync: false            # set to your frontend URL, e.g. https://your-app.vercel.app
+      # Only if you enable the real model (optional, then also add GEMINI_API_KEY as a secret
+      # and set WITH_GEMINI=1 so the SDK is installed in the image):
+      # - key: LLM_PROVIDER
+      #   value: gemini
+      # - key: GEMINI_API_KEY
+      #   sync: false
+      # - key: WITH_GEMINI
+      #   value: "1"
