@@ -3,6 +3,14 @@
 A small web app where an AI agent reads emails, **classifies** them, **extracts action items**, and **drafts replies**.
 Nothing is ever sent. Every draft lands in a pending queue and a human must approve, reject or edit it.
 
+**Live demo:** https://inbox-triage-agent-sai-jignas.vercel.app (frontend on Vercel) backed by https://inbox-triage-agent-95uq.onrender.com/docs (API on Render, Postgres on Neon).
+The free-tier backend sleeps when idle, so the first request after a pause can take about a minute.
+Register an account, click "Load sample inbox", then triage an email and review the draft queue.
+
+> **The public demo runs the deterministic stand-in model (`LLM_PROVIDER=fake`), not Gemini.** This is deliberate: it keeps the
+> demo free, repeatable and impossible to abuse for model spend. Its keyword rules can rate an email oddly (for example,
+> "release notes" as high urgency). The live-model results are in [Measured results](#measured-results-live-model).
+
 It is a portfolio project: the goal is a *correct, tested, honest* agent pipeline, not a finished product.
 Read the [Limitations](#limitations-and-not-built-yet) section before judging what it can do.
 
