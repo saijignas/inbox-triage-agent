@@ -1,0 +1,7 @@
+{
+  "fake": {
+    "_note": "Floors for the FakeLLM keyword stand-in (measured 0.933 / 0.767 / 0.900 on 30 emails). Guards the pipeline, NOT model quality.",
+    "min_accuracy": {"category": 0.90, "urgency": 0.75, "needs_reply": 0.85},
+    "max_failed_runs": 0
+  }
+}
