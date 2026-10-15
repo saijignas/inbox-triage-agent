@@ -53,10 +53,11 @@ def run_agent(
     provider: LLMProvider,
     registry: ToolRegistry,
     config: AgentConfig | None = None,
-    sleep: Callable[[float], None] = time.sleep,
+    sleep: Callable[[float], None] | None = None,
     clock: Callable[[], float] = time.monotonic,
 ) -> AgentRun:
     cfg = config or AgentConfig()
+    sleep = sleep or time.sleep  # resolved at call time so tests can patch it
     trace: list[TraceStep] = []
     messages = [
         Message(role="system", content=SYSTEM_PROMPT),

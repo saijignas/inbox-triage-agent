@@ -1,0 +1,50 @@
+[
+  {
+    "message_id": "seed-001",
+    "sender": "Maya Okafor <maya.okafor@northwind.example.test>",
+    "subject": "Can we meet Thursday to plan the Q3 launch?",
+    "body": "Hi,\n\nCould we schedule a call on Thursday afternoon to plan the Q3 launch? I'd like to walk through the timeline and agree on owners.\n\nPlease send me two time slots that work for you by tomorrow.\n\nThanks,\nMaya"
+  },
+  {
+    "message_id": "seed-002",
+    "sender": "Billing <billing@brightpath.example.test>",
+    "subject": "Invoice 20418 is overdue",
+    "body": "Hello,\n\nOur records show invoice 20418 (amount due: 480.00) is overdue by 12 days. Please confirm payment by Friday or let me know if there is a problem with the invoice.\n\nRegards,\nAccounts Team"
+  },
+  {
+    "message_id": "seed-003",
+    "sender": "Daniel Reyes <daniel.reyes@fernlabs.example.test>",
+    "subject": "Production dashboard is down - urgent",
+    "body": "Hi team,\n\nThe production dashboard is not working and customers cannot load their reports. Can you look into this immediately? I need you to post an update in the incident channel within the hour.\n\nDaniel"
+  },
+  {
+    "message_id": "seed-004",
+    "sender": "The Weekly Byte <hello@weeklybyte.example.test>",
+    "subject": "The Weekly Byte - issue #212",
+    "body": "Top stories this week: a new open-source database release, three tips for faster CI builds, and a roundup of conference talks.\n\nView in browser. Unsubscribe at any time."
+  },
+  {
+    "message_id": "seed-005",
+    "sender": "prize-desk@lucky-wins.example.test",
+    "subject": "You have won a free gift!!!",
+    "body": "Congratulations, you have won! Click here to claim your free gift. Act now, limited time offer. Verify your account to receive the prize."
+  },
+  {
+    "message_id": "seed-006",
+    "sender": "Priya Raman <priya.raman@talentbridge.example.test>",
+    "subject": "Open role: junior backend engineer",
+    "body": "Hello,\n\nI came across your profile and think you could be a fit for an open role on our client's platform team. Would you be interested in a short intro call next week? Please send your resume if so.\n\nBest,\nPriya"
+  },
+  {
+    "message_id": "seed-007",
+    "sender": "Tom Becker <tom.becker@example.test>",
+    "subject": "Weekend trip photos",
+    "body": "Hey! Hope you're doing well. I finally sorted the photos from the trip. Want me to send them over, or should we catch up at dinner on Saturday?"
+  },
+  {
+    "message_id": "seed-008",
+    "sender": "Platform Team <platform@fernlabs.example.test>",
+    "subject": "FYI: sprint 14 release notes",
+    "body": "Heads up, sprint 14 release notes are published on the team wiki. No action needed. The postmortem for last week's outage will follow."
+  }
+]
